@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Unextify - PCU</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            /* Align items to the right */
+            justify-content: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            background: url('images/background.png') no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+            position: relative;
+            padding-right: 1.5in;
+            /* Leave space on the left */
+        }
+
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1;
+        }
+
+        .logo {
+            width: 200px;
+            height: auto;
+            margin-bottom: 0px;
+            position: relative;
+            right: 90px;
+            top: 10px;
+            z-index: 2;
+        }
+
+        .card {
+            width: 300px;
+            padding: 20px;
+            background: transparent;
+            backdrop-filter: blur(1.5px);
+            box-shadow: 0 0 10px rgb(241, 239, 239);
+            border-radius: 20px;
+            text-align: center;
+            color: white;
+            position: relative;
+            z-index: 2;
+            border: 2px solid white;
+            top: -20px;
+        }
+
+        h1 {
+            font-size: 1.6em;
+            color: white;
+            margin: 10px 0 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 5px;
+            cursor: pointer;
+            background-color: #dea25c;
+
+            color: white;
+            border: none;
+            border-radius: 5px;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .login-form {
+            display: none;
+            margin-top: 20px;
+            padding: 0px;
+        }
+
+        input {
+            margin-bottom: 15px;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 95%;
+        }
+
+        .error {
+            color: red;
+            margin-top: 10px;
+            font-size: 0.9em;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <img src="images/logo.png" alt="PCU Logo" class="logo">
+
+    <div class="card">
+        <h1>Welcome!</h1>
+        <p>Log in as:</p>
+        <button onclick="toggleLoginForm('studentLoginForm')">Student</button>
+        <button onclick="toggleLoginForm('teacherLoginForm')">Teacher</button>
+
+        <div class="login-form" id="studentLoginForm">
+            <h2>Student Login</h2>
+            <form id="studentForm">
+                <input type="email" id="studentEmail" placeholder="Email" required>
+                <input type="password" id="studentPassword" placeholder="Password" required>
+                <button type="submit">Login</button>
+            </form>
+            <div class="error" id="studentError">Invalid email or password. Please try again.</div>
+        </div>
+
+        <div class="login-form" id="teacherLoginForm">
+            <h2>Teacher Login</h2>
+            <form id="teacherForm">
+                <input type="email" id="teacherEmail" placeholder="Email" required>
+                <input type="password" id="teacherPassword" placeholder="Password" required>
+                <button type="submit">Login</button>
+            </form>
+            <div class="error" id="teacherError">Invalid email or password. Please try again.</div>
+        </div>
+    </div>
+
+    <script>
+        function toggleLoginForm(formId) {
+            document.querySelectorAll('.login-form').forEach(form => form.style.display = 'none');
+            document.getElementById(formId).style.display = 'block';
+        }
+
+        document.getElementById('studentForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+            const email = document.getElementById('studentEmail').value;
+            const password = document.getElementById('studentPassword').value;
+            const errorMessage = document.getElementById('studentError');
+
+            if (email === 'student1@pcu.edu.ph' && password === 'studentpassword') {
+                errorMessage.style.display = 'none';
+                window.location.href = 'Students/Dashboard.html';
+            } else {
+                errorMessage.style.display = 'block';
+            }
+        });
+
+        document.getElementById('teacherForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+            const email = document.getElementById('teacherEmail').value;
+            const password = document.getElementById('teacherPassword').value;
+            const errorMessage = document.getElementById('teacherError');
+
+            if (email === 'teacher1@pcu.edu.ph' && password === 'teacherpassword') {
+                errorMessage.style.display = 'none';
+                window.location.href = 'Teachers/Dashboard.html';
+            } else {
+                errorMessage.style.display = 'block';
+            }
+        });
+    </script>
+</body>
+
+</html>
